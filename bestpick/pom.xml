@@ -23,6 +23,7 @@
         <module>api-gateway</module>
         <module>api-gateway</module>
         <module>discovery-server</module>
+        <module>users-microservice</module>
     </modules>
 
     <properties>
