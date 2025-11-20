@@ -9,7 +9,7 @@
           <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.m4gpie</groupId>
+    <groupId>com.bestpick</groupId>
     <artifactId>users-microservice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
