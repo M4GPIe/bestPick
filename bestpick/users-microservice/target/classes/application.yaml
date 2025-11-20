@@ -9,13 +9,13 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create-drop # TODO: quitar en produccion
+      ddl-auto: create-drop # TODO: quit on production
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8080
+  port: 0
 
 eureka:
   client:
