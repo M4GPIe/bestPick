@@ -1,6 +1,7 @@
 package com.bestpick.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bestpick.dto.UserRequestDto;
@@ -8,6 +9,7 @@ import com.bestpick.dto.UserResponseDto;
 import com.bestpick.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@Slf4j
 public class UsersController {
 
     private final UserService userService;
@@ -33,9 +36,9 @@ public class UsersController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto[]> getUsers() {
+    public ResponseEntity<UserResponseDto[]> getUsers(@RequestParam(required = false) String username) {
 
-        UserResponseDto[] users = userService.getAllUsers();
+        UserResponseDto[] users = userService.getAllUsers(username);
 
         return ResponseEntity.ok(users);
     }
@@ -58,7 +61,9 @@ public class UsersController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable String id) {
+
         userService.deleteUserById(id);
+
         return ResponseEntity.ok("User deleted correctly");
     }
 

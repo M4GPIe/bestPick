@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,9 +27,13 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
     public UserResponseDto createUser(UserRequestDto userDto) {
 
         User newUser = new User(userDto);
+
+        newUser.setPasswordHash(encoder.encode(userDto.password()));
 
         String profileImagePath;
 
@@ -64,9 +69,15 @@ public class UserService {
         return profileImageUploadPath + "/" + imageId;
     }
 
-    public UserResponseDto[] getAllUsers() {
+    public UserResponseDto[] getAllUsers(String username) {
 
-        List<User> users = userRepository.findAll();
+        List<User> users;
+
+        if (username == null || username.isBlank()) {
+            users = userRepository.findAll();
+        } else {
+            users = userRepository.findByUsername(username);
+        }
 
         return users.stream().map(User::toResponseDto).toArray(UserResponseDto[]::new);
     }

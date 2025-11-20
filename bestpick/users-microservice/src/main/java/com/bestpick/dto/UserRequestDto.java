@@ -2,6 +2,6 @@ package com.bestpick.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public record UserRequestDto(String username, String passwordHash, String description, MultipartFile profilePhoto) {
+public record UserRequestDto(String username, String password, String description, MultipartFile profilePhoto) {
 
 }
