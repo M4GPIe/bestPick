@@ -20,6 +20,7 @@
         <module>discovery-server</module>
         <module>users-microservice</module>
         <module>auth-service</module>
+        <module>social-graph-microservice</module>
     </modules>
 
     <properties>
