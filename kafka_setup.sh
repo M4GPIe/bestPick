@@ -17,7 +17,7 @@ KAFKA_TOPICS_BIN="/opt/kafka/bin/kafka-topics.sh"
 # Topic list
 #############################################
 TOPICS=(
-  "create-user",
+  "create-user"
   "delete-user"
 )
 
