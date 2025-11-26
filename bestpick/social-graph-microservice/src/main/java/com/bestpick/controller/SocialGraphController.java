@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bestpick.dto.RelationshipDto;
 import com.bestpick.model.Recommendation;
+import com.bestpick.model.UserRelations;
 import com.bestpick.service.SocialGraphService;
 
 import java.util.List;
@@ -58,6 +59,13 @@ public class SocialGraphController {
 
         return ResponseEntity.ok(recommendations.toArray(Recommendation[]::new));
 
+    }
+
+    @GetMapping("/relations/{id}")
+    public ResponseEntity<UserRelations> getMethodName(@PathVariable String userId) {
+        UserRelations userRelations = socialGraphService.getUserRelations(userId);
+
+        return ResponseEntity.ok(userRelations);
     }
 
 }
