@@ -61,7 +61,8 @@
             "mainClass": "com.bestpick.AuthServiceApplication",
             "projectName": "auth-service",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=45001 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=auth-service"
         },
         {
             "type": "java",
@@ -70,6 +71,17 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.bestpick.apigateway.ApiGatewayApplication",
             "projectName": "api-gateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=43541 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=api-gateway"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-SocialGraphMicroserviceApplication<social-graph-microservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.bestpick.SocialGraphMicroserviceApplication",
+            "projectName": "social-graph-microservice",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
