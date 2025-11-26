@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: social-graph-microservice
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bestpick-users-db
+    username: admin
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # TODO: quit on production
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    consumer:
+      group-id: social-graph-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+            json:
+                trusted:
+                    packages: "com.bestpick.kafka.events"
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
