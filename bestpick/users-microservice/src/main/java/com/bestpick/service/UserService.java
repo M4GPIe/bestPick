@@ -13,6 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.bestpick.dto.UserRequestDto;
 import com.bestpick.dto.UserResponseDto;
+import com.bestpick.kafka.KafkaProducer;
+import com.bestpick.kafka.events.UserEvent;
 import com.bestpick.model.User;
 import com.bestpick.repository.UserRepository;
 
@@ -26,6 +28,8 @@ public class UserService {
     private String profileImageUploadPath;
 
     private final UserRepository userRepository;
+
+    private final KafkaProducer kafkaProducer;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -56,6 +60,9 @@ public class UserService {
                     "The username is already in use",
                     e);
         }
+
+        kafkaProducer.sendCreateUserEvent(new UserEvent(newUser.getId(), newUser.getUsername(),
+                newUser.getDescription(), newUser.getProfileImagePath()));
 
         return newUser.toResponseDto();
 
@@ -146,6 +153,9 @@ public class UserService {
                         "User not found"));
 
         userRepository.delete(existingUser);
+
+        kafkaProducer.sendDeleteUserEvent(new UserEvent(existingUser.getId(), existingUser.getUsername(),
+                existingUser.getDescription(), existingUser.getProfileImagePath()));
 
     }
 
