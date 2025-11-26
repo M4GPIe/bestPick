@@ -29,10 +29,8 @@ public class GatewayConfig {
                                                 .filters(f -> f.filter(jwtAuthenticationFilter))
                                                 .uri("lb://users-microservice"))
 
-                                .route(r -> r.path("/api/social-graph")
-                                                .and()
-                                                .method(HttpMethod.POST)
-                                                .filters(f -> f.filter(apiKeyFilter))
+                                .route(r -> r.path("/api/social-graph/**")
+                                                .filters(f -> f.filter(jwtAuthenticationFilter))
                                                 .uri("lb://social-graph-microservice"))
 
                                 .route(r -> r.path("/eureka/web")
