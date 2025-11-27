@@ -24,8 +24,7 @@ public class SocialGraphService {
     }
 
     public void unfollow(Long fromUserId, Long toUserId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'unfollow'");
+        socialGraphRepository.deleteFollowRelation(fromUserId, toUserId);
     }
 
     public void block(Long fromUserId, Long toUserId) {

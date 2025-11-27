@@ -15,6 +15,12 @@ public interface SocialGraphRepository extends Neo4jRepository<User, Long> {
     void createFollowRelation(Long fromUserId, Long toUserId);
 
     @Query("""
+            MATCH (u1: User {id: $fromUserId})-[r:FOLLOWS]->(u2: User {id: $toUserId})
+            DELETE r
+            """)
+    void deleteFollowRelation(Long fromUserId, Long toUserId);
+
+    @Query("""
             MATCH (u: User {id: $userId})
             DETACH DELETE u
             """)
