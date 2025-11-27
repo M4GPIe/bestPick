@@ -81,7 +81,7 @@ public class JWTService {
                 .add("X-User-Id", user.getId())
                 .add("X-application", "microservices-project")
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 30))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 30 * 5))
                 .and()
                 .signWith(secretKey)
                 .compact();
