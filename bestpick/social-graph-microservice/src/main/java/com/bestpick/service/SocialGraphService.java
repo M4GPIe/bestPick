@@ -27,14 +27,24 @@ public class SocialGraphService {
         socialGraphRepository.deleteFollowRelation(fromUserId, toUserId);
     }
 
+    public boolean isFollowing(Long fromUserId, Long toUserId) {
+        return socialGraphRepository.isFollowing(fromUserId, toUserId);
+    }
+
     public void block(Long fromUserId, Long toUserId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'block'");
+        boolean isFollowing = socialGraphRepository.isFollowing(fromUserId, toUserId);
+        if (isFollowing) {
+            socialGraphRepository.deleteFollowRelation(fromUserId, toUserId);
+        }
+        socialGraphRepository.createBlockingRelation(fromUserId, toUserId);
     }
 
     public void unblock(Long fromUserId, Long toUserId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'unblock'");
+        socialGraphRepository.deleteBlockingRelation(fromUserId, toUserId);
+    }
+
+    public boolean isBlocking(Long fromUserId, Long toUserId) {
+        return socialGraphRepository.isBlocking(fromUserId, toUserId);
     }
 
     public UserRelations getUserRelations(Long userId) {

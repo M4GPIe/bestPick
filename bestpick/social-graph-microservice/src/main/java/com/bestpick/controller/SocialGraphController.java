@@ -38,6 +38,13 @@ public class SocialGraphController {
         return ResponseEntity.ok("User unfollowed correctly");
     }
 
+    @PostMapping("/isFollowing")
+    public ResponseEntity<Boolean> isFollowing(@RequestBody RelationshipDto relationshipDto) {
+        boolean isFollowing = socialGraphService.isFollowing(relationshipDto.fromUserId(), relationshipDto.toUserId());
+
+        return ResponseEntity.ok(isFollowing);
+    }
+
     @PostMapping("/block")
     public ResponseEntity<String> block(@RequestBody RelationshipDto relationshipDto) {
         socialGraphService.block(relationshipDto.fromUserId(), relationshipDto.toUserId());
@@ -50,6 +57,12 @@ public class SocialGraphController {
         socialGraphService.unblock(relationshipDto.fromUserId(), relationshipDto.toUserId());
 
         return ResponseEntity.ok("User unblocked correctly");
+    }
+
+    @PostMapping("/isBlocking")
+    public ResponseEntity<Boolean> isBlocking(@RequestBody RelationshipDto relationshipDto) {
+        boolean isBlocking = socialGraphService.isBlocking(relationshipDto.fromUserId(), relationshipDto.toUserId());
+        return ResponseEntity.ok(isBlocking);
     }
 
     @GetMapping("/recommendations/{id}")
