@@ -2,18 +2,6 @@ spring:
   application:
     name: social-graph-microservice
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/bestpick-users-db
-    username: admin
-    password: admin
-
-  jpa:
-    hibernate:
-      ddl-auto: create-drop # TODO: quit on production
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-
   kafka:
     consumer:
       group-id: social-graph-group
