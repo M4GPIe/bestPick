@@ -63,8 +63,20 @@ public class SocialGraphService {
     }
 
     public List<Recommendation> getUserRecommendations(Long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserRecommendations'");
+
+        // score is length of the path on the graph, so higher is worse
+        // need to revert that and normalize with 0 to 1 affinity values
+        List<Recommendation> recommendations = socialGraphRepository.getPossibleFriendsRecommendation(userId, 3);
+
+        double maxPathLength = recommendations.stream().mapToDouble(Recommendation::getScore).max().orElse(1);
+
+        // min score 1/maxPathLength
+        recommendations = recommendations.stream().map(r -> {
+            r.setScore((maxPathLength + 1 - r.getScore()) / maxPathLength);
+            return r;
+        }).toList();
+
+        return recommendations;
     }
 
     public void createUserNode(User user) {

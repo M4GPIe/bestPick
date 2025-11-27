@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
+import com.bestpick.model.Recommendation;
 import com.bestpick.model.User;
 
 public interface SocialGraphRepository extends Neo4jRepository<User, Long> {
@@ -74,5 +75,12 @@ public interface SocialGraphRepository extends Neo4jRepository<User, Long> {
             RETURN u.id as userId
             """)
     List<Long> getBlockedByIds(Long userId);
+
+    @Query("""
+            MATCH p = SHORTEST 1 (u1: User {id: $userId})-[:FOLLOWS]-+(u2:User)
+            WHERE u2.id <> $userId and length(p) <= $maxDepth and not Exists {(u1)-[r]->(u2)}
+            RETURN length(p) as score, u2.id as userId
+            """)
+    List<Recommendation> getPossibleFriendsRecommendation(Long userId, int maxDepth);
 
 }

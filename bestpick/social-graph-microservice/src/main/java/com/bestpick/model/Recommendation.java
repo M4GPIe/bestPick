@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class Recommendation {
 
     @Id
-    private Long id;
+    private Long userId;
 
     // the higher score, the better recommendation
-    private int score;
+    private double score;
 
 }
