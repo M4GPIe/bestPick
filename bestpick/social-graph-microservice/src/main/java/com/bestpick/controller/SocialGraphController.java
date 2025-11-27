@@ -11,6 +11,7 @@ import com.bestpick.service.SocialGraphService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,18 +66,33 @@ public class SocialGraphController {
         return ResponseEntity.ok(isBlocking);
     }
 
-    @GetMapping("/recommendations/{id}")
-    public ResponseEntity<Recommendation[]> getUserRecommendations(@PathVariable Long userId) {
+    @GetMapping("/recommendations/{userId}")
+    public ResponseEntity<Recommendation[]> getUserRecommendations(@PathVariable String userId) {
 
-        List<Recommendation> recommendations = socialGraphService.getUserRecommendations(userId);
+        Long parsedId;
+        try {
+            parsedId = Long.valueOf(userId);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        List<Recommendation> recommendations = socialGraphService.getUserRecommendations(parsedId);
 
         return ResponseEntity.ok(recommendations.toArray(Recommendation[]::new));
 
     }
 
-    @GetMapping("/relations/{id}")
-    public ResponseEntity<UserRelations> getMethodName(@PathVariable Long userId) {
-        UserRelations userRelations = socialGraphService.getUserRelations(userId);
+    @GetMapping("/relations/{userId}")
+    public ResponseEntity<UserRelations> getUserRelations(@PathVariable String userId) {
+
+        Long parsedId;
+        try {
+            parsedId = Long.valueOf(userId);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        UserRelations userRelations = socialGraphService.getUserRelations(parsedId);
 
         return ResponseEntity.ok(userRelations);
     }

@@ -1,6 +1,7 @@
 package com.bestpick.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,17 @@ public class SocialGraphService {
     }
 
     public UserRelations getUserRelations(Long userId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserRelations'");
+        List<Long> followingIds = socialGraphRepository.getFollowingIds(userId);
+        List<Long> followerIds = socialGraphRepository.getFollowerIds(userId);
+        List<Long> blockingIds = socialGraphRepository.getBlockingIds(userId);
+        List<Long> blockedByIds = socialGraphRepository.getBlockedByIds(userId);
+
+        return new UserRelations(
+                userId,
+                Set.of(followingIds.toArray(Long[]::new)),
+                Set.of(followerIds.toArray(Long[]::new)),
+                Set.of(blockingIds.toArray(Long[]::new)),
+                Set.of(blockedByIds.toArray(Long[]::new)));
     }
 
     public List<Recommendation> getUserRecommendations(Long userId) {

@@ -1,5 +1,7 @@
 package com.bestpick.repository;
 
+import java.util.List;
+
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
@@ -48,4 +50,29 @@ public interface SocialGraphRepository extends Neo4jRepository<User, Long> {
                 DETACH DELETE u
             """)
     void deleteUserAndRelations(Long userId);
+
+    @Query("""
+            MATCH (:User {id: $userId})-[:FOLLOWS]->(u:User)
+            RETURN u.id as userId
+            """)
+    List<Long> getFollowingIds(Long userId);
+
+    @Query("""
+            MATCH (u:User)-[:FOLLOWS]->(:User {id: $userId})
+            RETURN u.id as userId
+            """)
+    List<Long> getFollowerIds(Long userId);
+
+    @Query("""
+            MATCH (:User {id: $userId})-[:BLOCKS]->(u:User)
+            RETURN u.id as userId
+            """)
+    List<Long> getBlockingIds(Long userId);
+
+    @Query("""
+            MATCH (u:User)-[:BLOCKS]->(:User {id: $userId})
+            RETURN u.id as userId
+            """)
+    List<Long> getBlockedByIds(Long userId);
+
 }

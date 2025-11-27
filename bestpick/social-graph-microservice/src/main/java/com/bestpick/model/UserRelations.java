@@ -14,7 +14,10 @@ public class UserRelations {
     @Id
     private Long id;
 
-    private Set<String> followingIds;
-    private Set<String> followerIds;
+    private Set<Long> followingIds;
+    private Set<Long> followerIds;
+
+    private Set<Long> blockingIds;
+    private Set<Long> blockedByIds;
 
 }
