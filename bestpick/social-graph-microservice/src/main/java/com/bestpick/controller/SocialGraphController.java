@@ -53,7 +53,7 @@ public class SocialGraphController {
     }
 
     @GetMapping("/recommendations/{id}")
-    public ResponseEntity<Recommendation[]> getUserRecommendations(@PathVariable String userId) {
+    public ResponseEntity<Recommendation[]> getUserRecommendations(@PathVariable Long userId) {
 
         List<Recommendation> recommendations = socialGraphService.getUserRecommendations(userId);
 
@@ -62,7 +62,7 @@ public class SocialGraphController {
     }
 
     @GetMapping("/relations/{id}")
-    public ResponseEntity<UserRelations> getMethodName(@PathVariable String userId) {
+    public ResponseEntity<UserRelations> getMethodName(@PathVariable Long userId) {
         UserRelations userRelations = socialGraphService.getUserRelations(userId);
 
         return ResponseEntity.ok(userRelations);

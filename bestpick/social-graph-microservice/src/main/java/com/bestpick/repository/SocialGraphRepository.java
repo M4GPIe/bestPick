@@ -12,6 +12,12 @@ public interface SocialGraphRepository extends Neo4jRepository<User, Long> {
             MERGE (u2:User {id: $toUserId})
             MERGE (u1)-[:FOLLOWS]->(u2)
                 """)
-    void createFollowRelation(String fromUserId, String toUserId);
+    void createFollowRelation(Long fromUserId, Long toUserId);
+
+    @Query("""
+            MATCH (u: User {id: $userId})
+            DETACH DELETE u
+            """)
+    void deleteUserAndRelations(Long userId);
 
 }
