@@ -83,4 +83,9 @@ public interface SocialGraphRepository extends Neo4jRepository<User, Long> {
             """)
     List<Recommendation> getPossibleFriendsRecommendation(Long userId, int maxDepth);
 
+    @Query("""
+            RETURN EXISTS {:User {id: $userId}}
+            """)
+    boolean getUserExists(Long userId);
+
 }

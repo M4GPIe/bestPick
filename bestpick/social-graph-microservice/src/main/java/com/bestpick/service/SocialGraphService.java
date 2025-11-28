@@ -61,6 +61,12 @@ public class SocialGraphService {
                     "Given Id must be a valid number");
         }
 
+        if (!socialGraphRepository.getUserExists(userId)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "User not found on DB");
+        }
+
         List<Long> followingIds = socialGraphRepository.getFollowingIds(userId);
         List<Long> followerIds = socialGraphRepository.getFollowerIds(userId);
         List<Long> blockingIds = socialGraphRepository.getBlockingIds(userId);
@@ -74,11 +80,18 @@ public class SocialGraphService {
                 Set.of(blockedByIds.toArray(Long[]::new)));
     }
 
-    public List<Recommendation> getUserRecommendations(Long userId) {
+    public List<Recommendation> getUserRecommendations(String userId) {
+
+        Long parsedId;
+        try {
+            parsedId = Long.valueOf(userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Given userId must be a valid number");
+        }
 
         // score is length of the path on the graph, so higher is worse
         // need to revert that and normalize with 0 to 1 affinity values
-        List<Recommendation> recommendations = socialGraphRepository.getPossibleFriendsRecommendation(userId, 3);
+        List<Recommendation> recommendations = socialGraphRepository.getPossibleFriendsRecommendation(parsedId, 3);
 
         double maxPathLength = recommendations.stream().mapToDouble(Recommendation::getScore).max().orElse(1);
 
