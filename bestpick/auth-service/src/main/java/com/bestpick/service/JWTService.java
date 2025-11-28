@@ -8,7 +8,9 @@ import java.util.function.Function;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.bestpick.model.User;
 
@@ -34,6 +36,11 @@ public class JWTService {
     }
 
     public Boolean isValid(String token) {
+
+        if (token == null || token.length() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Token must not be null");
+        }
+
         try {
             return !isTokenExpired(token);
         } catch (ExpiredJwtException e) {

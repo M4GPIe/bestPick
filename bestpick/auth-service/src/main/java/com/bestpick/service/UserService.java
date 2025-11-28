@@ -1,11 +1,14 @@
 package com.bestpick.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 
-import com.bestpick.dto.UserLoginDto;
+import com.bestpick.dto.ExternalUserLoginDto;
+import com.bestpick.dto.InternalUserLoginDto;
 import com.bestpick.model.User;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +27,7 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
-    public Mono<String> loginUser(UserLoginDto userDto) {
+    public Mono<String> loginUser(InternalUserLoginDto userDto) {
 
         return webClientBuilder.build()
                 .get()
@@ -33,8 +36,8 @@ public class UserService {
                 .retrieve()
                 .bodyToMono(User[].class)
                 .flatMap(userArray -> {
-                    if (userArray == null) {
-                        return Mono.just("User not found");
+                    if (userArray == null || userArray.length == 0) {
+                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong username or password");
                     }
 
                     User user = userArray[0];
@@ -44,14 +47,13 @@ public class UserService {
                         if (encoder.matches(userDto.password(), user.getPasswordHash())) {
                             return jwtService.generateToken(user);
                         } else {
-                            return "Wrong password";
+                            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong username or password");
                         }
-                    })
-                            .subscribeOn(Schedulers.boundedElastic());
+                    }).subscribeOn(Schedulers.boundedElastic());
                 });
     }
 
-    public Mono<String> loginExternalUser(UserLoginDto userDto) {
+    public Mono<String> loginExternalUser(ExternalUserLoginDto userDto) {
         return webClientBuilder.build()
                 .get()
                 .uri("http://users-microservice/api/users",
@@ -59,15 +61,15 @@ public class UserService {
                 .retrieve()
                 .bodyToMono(User[].class)
                 .flatMap(userArray -> {
-                    if (userArray == null) {
-                        return Mono.just("User not found");
+                    if (userArray == null || userArray.length == 0) {
+                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong username or sub");
                     }
 
                     User user = userArray[0];
                     if (user.getSub().equals(userDto.sub())) {
                         return Mono.just(jwtService.generateToken(user));
                     } else {
-                        return Mono.just("Wrong password");
+                        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong username or sub");
                     }
                 });
     }
