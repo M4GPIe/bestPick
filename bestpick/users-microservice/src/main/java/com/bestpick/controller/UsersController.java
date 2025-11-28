@@ -107,6 +107,16 @@ public class UsersController {
         return ResponseEntity.ok("User deleted correctly");
     }
 
-    // TODO: implement check if username is in use
+    @Operation(summary = "Get is username taken", description = "Returns true if the username is already being used by other user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Username checked correctly"),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema(implementation = SpringErrorDto.class)))
+    })
+    @GetMapping("/isUsernameTaken/{username}")
+    public ResponseEntity<Boolean> getMethodName(@PathVariable String username) {
+        boolean taken = userService.isUsernameTaken(username);
+
+        return ResponseEntity.ok(taken);
+    }
 
 }

@@ -19,9 +19,11 @@ import com.bestpick.model.User;
 import com.bestpick.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     @Value("${profileImageUploadPath}")
@@ -162,6 +164,14 @@ public class UserService {
 
         kafkaProducer.sendDeleteUserEvent(new UserEvent(existingUser.getId(), existingUser.getUsername(),
                 existingUser.getDescription(), existingUser.getProfileImagePath()));
+
+    }
+
+    public boolean isUsernameTaken(String username) {
+
+        List<User> users = userRepository.findByUsername(username);
+
+        return users.size() != 0;
 
     }
 
