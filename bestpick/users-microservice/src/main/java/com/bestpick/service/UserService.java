@@ -37,6 +37,11 @@ public class UserService {
 
         User newUser = new User(userDto);
 
+        if ((userDto.password() == null && userDto.sub() == null) || userDto.username() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Missing required parameters");
+        }
+
         if (userDto.password() != null) {
             newUser.setPasswordHash(encoder.encode(userDto.password()));
         }
@@ -56,7 +61,6 @@ public class UserService {
         try {
             newUser = userRepository.save(newUser);
         } catch (DataIntegrityViolationException e) {
-            // Aquí normalmente es porque el username/nickname ya existe
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "The username is already in use",

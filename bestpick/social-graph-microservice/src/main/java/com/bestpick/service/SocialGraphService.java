@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.bestpick.model.Recommendation;
 import com.bestpick.model.User;
@@ -48,7 +50,17 @@ public class SocialGraphService {
         return socialGraphRepository.isBlocking(fromUserId, toUserId);
     }
 
-    public UserRelations getUserRelations(Long userId) {
+    public UserRelations getUserRelations(String id) {
+
+        Long userId;
+        try {
+            userId = Long.valueOf(id);
+        } catch (NumberFormatException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Given Id must be a valid number");
+        }
+
         List<Long> followingIds = socialGraphRepository.getFollowingIds(userId);
         List<Long> followerIds = socialGraphRepository.getFollowerIds(userId);
         List<Long> blockingIds = socialGraphRepository.getBlockingIds(userId);

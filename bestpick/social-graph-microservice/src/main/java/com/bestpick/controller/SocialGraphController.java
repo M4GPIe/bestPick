@@ -2,6 +2,7 @@ package com.bestpick.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.bestpick.dto.RelationshipDto;
 import com.bestpick.model.Recommendation;
@@ -85,14 +86,7 @@ public class SocialGraphController {
     @GetMapping("/relations/{userId}")
     public ResponseEntity<UserRelations> getUserRelations(@PathVariable String userId) {
 
-        Long parsedId;
-        try {
-            parsedId = Long.valueOf(userId);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-
-        UserRelations userRelations = socialGraphService.getUserRelations(parsedId);
+        UserRelations userRelations = socialGraphService.getUserRelations(userId);
 
         return ResponseEntity.ok(userRelations);
     }
