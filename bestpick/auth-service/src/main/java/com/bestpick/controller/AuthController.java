@@ -27,10 +27,14 @@ public class AuthController {
     @Autowired
     JWTService jwtService;
 
-    @PostMapping("/login")
+    @PostMapping("/login/userPassword")
     public Mono<String> login(@RequestBody UserLoginDto user) {
         return userService.loginUser(user);
+    }
 
+    @PostMapping("/login/external")
+    public Mono<String> loginExternal(@RequestBody UserLoginDto user) {
+        return userService.loginExternalUser(user);
     }
 
     @PostMapping("/verifyToken")

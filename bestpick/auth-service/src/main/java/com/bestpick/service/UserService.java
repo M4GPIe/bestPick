@@ -51,4 +51,25 @@ public class UserService {
                 });
     }
 
+    public Mono<String> loginExternalUser(UserLoginDto userDto) {
+        return webClientBuilder.build()
+                .get()
+                .uri("http://users-microservice/api/users",
+                        uriBuilder -> uriBuilder.queryParam("username", userDto.username()).build())
+                .retrieve()
+                .bodyToMono(User[].class)
+                .flatMap(userArray -> {
+                    if (userArray == null) {
+                        return Mono.just("User not found");
+                    }
+
+                    User user = userArray[0];
+                    if (user.getSub().equals(userDto.sub())) {
+                        return Mono.just(jwtService.generateToken(user));
+                    } else {
+                        return Mono.just("Wrong password");
+                    }
+                });
+    }
+
 }

@@ -1,5 +1,5 @@
 package com.bestpick.dto;
 
-public record UserLoginDto(String username, String password) {
+public record UserLoginDto(String username, String password, String sub) {
 
 }

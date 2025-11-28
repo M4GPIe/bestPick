@@ -29,9 +29,13 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String username;
-    private String passwordHash;
+    private String passwordHash; // if user logs with external provider will be null
     private String description;
     private String profileImagePath;
+    private String iss; // external provider
+
+    @Column(unique = true, nullable = true)
+    private String sub; // external provider user id
 
     public User(UserRequestDto userDto) {
         BeanUtils.copyProperties(userDto, this);
@@ -42,7 +46,9 @@ public class User {
                 this.getUsername(),
                 this.getPasswordHash(),
                 this.getDescription(),
-                this.getProfileImagePath());
+                this.getProfileImagePath(),
+                this.getIss(),
+                this.getSub());
     }
 
 }

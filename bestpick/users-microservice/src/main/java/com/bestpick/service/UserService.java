@@ -37,7 +37,9 @@ public class UserService {
 
         User newUser = new User(userDto);
 
-        newUser.setPasswordHash(encoder.encode(userDto.password()));
+        if (userDto.password() != null) {
+            newUser.setPasswordHash(encoder.encode(userDto.password()));
+        }
 
         String profileImagePath;
 
