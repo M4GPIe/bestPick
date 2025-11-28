@@ -21,6 +21,7 @@
         <module>users-microservice</module>
         <module>auth-service</module>
         <module>social-graph-microservice</module>
+        <module>text-posts-microservice</module>
     </modules>
 
     <properties>

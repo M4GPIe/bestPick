@@ -33,6 +33,10 @@ public class GatewayConfig {
                         .filters(f -> f.filter(jwtAuthenticationFilter))
                         .uri("lb://social-graph-microservice"))
 
+                .route(r -> r.path("/api/text-posts/**")
+                        .filters(f -> f.filter(jwtAuthenticationFilter))
+                        .uri("lb://text-posts-microservice"))
+
                 .route(r -> r.path("/eureka/web")
                         .filters(f -> f.setPath("/"))
                         .uri("http://localhost:8761"))

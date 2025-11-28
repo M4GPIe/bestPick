@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.bestpick</groupId>
-    <artifactId>social-graph-microservice</artifactId>
+    <artifactId>text-posts-microservice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -19,16 +19,10 @@
     </properties>
 
     <dependencies>
-        <!-- REST + JSON -->
+         <!-- REST + JSON -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- Neo4j (Spring Data Neo4j) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-neo4j</artifactId>
         </dependency>
 
         <!-- Lombok -->
@@ -38,7 +32,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Kafka -->
+         <!-- Kafka -->
         <dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
@@ -56,6 +50,14 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>${springdoc.version}</version>
 		</dependency>
+
+        <!-- MongoDB -->
+        <dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>mongodb</artifactId>
+			<scope>test</scope>
+		</dependency>
+
     </dependencies>
 
 </project>
