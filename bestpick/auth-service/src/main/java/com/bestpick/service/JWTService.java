@@ -79,7 +79,7 @@ public class JWTService {
                 .claims()
                 .add(claims)
                 .add("X-User-Id", user.getId())
-                .add("X-application", "microservices-project")
+                .add("X-application", "bestPick")
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 30 * 5))
                 .and()
