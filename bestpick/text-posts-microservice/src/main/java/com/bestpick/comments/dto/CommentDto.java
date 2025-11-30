@@ -1,5 +1,11 @@
 package com.bestpick.comments.dto;
 
-public record CommentDto(String id, String userId, String commentBody, String postId) {
+import com.bestpick.comments.model.CommentMetadata;
 
+public record CommentDto(
+        String id,
+        String userId,
+        String commentBody,
+        String postId,
+        CommentMetadata commentMetadata) {
 }

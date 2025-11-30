@@ -22,6 +22,8 @@ public class TextPost {
 
     private String postBody;
 
+    private PostMetadata postMetadata;
+
     private Map<String, Integer> hashtags;
 
 }
