@@ -12,11 +12,16 @@ import com.bestpick.comments.dto.CommentRequestDto;
 import com.bestpick.comments.model.Comment;
 import com.bestpick.comments.model.CommentMetadata;
 import com.bestpick.comments.repository.CommentsRepository;
+import com.bestpick.testPosts.model.TextPost;
+import com.bestpick.testPosts.repository.TextPostRepository;
 
 public class CommentsService {
 
     @Autowired
     CommentsRepository commentsRepository;
+
+    @Autowired
+    TextPostRepository textPostsRepository;
 
     public List<CommentDto> getComments(String userId, String postId) {
 
@@ -59,14 +64,26 @@ public class CommentsService {
         return Comment.toDto(commentsRepository.save(comment));
     }
 
-    public CommentDto postComment(CommentRequestDto newComment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateComment'");
+    public CommentDto postComment(CommentRequestDto newCommentDto) {
+
+        TextPost textPost = textPostsRepository
+                .findById(newCommentDto.postId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Text post not found on DB"));
+
+        CommentMetadata metadata = new CommentMetadata(Instant.now(), Instant.now());
+
+        Comment newComment = new Comment(null,
+                newCommentDto.userId(),
+                textPost,
+                newCommentDto.commentBody(),
+                metadata);
+
+        return Comment.toDto(commentsRepository.save(newComment));
     }
 
     public void deleteComment(String commentId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteComment'");
+        commentsRepository.deleteById(commentId);
     }
 
 }
