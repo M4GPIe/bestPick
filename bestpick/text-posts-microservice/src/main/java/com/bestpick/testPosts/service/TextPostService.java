@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -70,8 +71,20 @@ public class TextPostService {
     }
 
     public TextPostDto updateTextPost(String id, TextPostRequestDto post) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateTextPost'");
+
+        if (id == null || id.length() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Id parameter must be valid mongoDB id");
+        }
+
+        TextPost existingPost = textPostRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "post not found on DB"));
+
+        BeanUtils.copyProperties(post, existingPost, "id");
+
+        TextPost savedPost = textPostRepository.save(existingPost);
+
+        return TextPost.toDto(savedPost);
     }
 
 }
