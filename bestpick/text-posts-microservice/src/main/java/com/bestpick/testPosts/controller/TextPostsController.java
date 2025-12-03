@@ -27,9 +27,9 @@ public class TextPostsController {
     TextPostService textPostService;
 
     @GetMapping()
-    public ResponseEntity<TextPostDto[]> getTextPosts(@RequestParam String userId,
-            @RequestParam String[] hashTags) {
-        List<TextPostDto> textPosts = textPostService.getTextPosts(userId, hashTags);
+    public ResponseEntity<TextPostDto[]> getTextPosts(@RequestParam(required = false) String userId,
+            @RequestParam(required = false) String[] hashtags) {
+        List<TextPostDto> textPosts = textPostService.getTextPosts(userId, hashtags);
 
         return ResponseEntity.ok(textPosts.toArray(TextPostDto[]::new));
     }

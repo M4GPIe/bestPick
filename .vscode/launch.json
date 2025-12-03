@@ -84,6 +84,16 @@
             "projectName": "social-graph-microservice",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TextPostsMicroserviceApplication<text-posts-microservice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.bestpick.TextPostsMicroserviceApplication",
+            "projectName": "text-posts-microservice",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

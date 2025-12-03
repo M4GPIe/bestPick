@@ -1,14 +1,15 @@
 package com.bestpick.testPosts.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.bestpick.testPosts.dto.TextPostDto;
@@ -19,6 +20,7 @@ import com.bestpick.testPosts.repository.TextPostRepository;
 
 import java.time.Instant;
 
+@Service
 public class TextPostService {
 
     @Autowired
@@ -26,7 +28,13 @@ public class TextPostService {
 
     public List<TextPostDto> getTextPosts(String userId, String[] hashTags) {
 
-        List<TextPost> textPosts = textPostRepository.findByUserIdAndHashtags(userId, List.of(hashTags));
+        List<String> hashtagsList = new ArrayList<String>();
+
+        if (hashTags != null) {
+            hashtagsList = List.of(hashTags);
+        }
+
+        List<TextPost> textPosts = textPostRepository.findByUserIdAndHashtags(userId, hashtagsList);
 
         return textPosts.stream().map(TextPost::toDto).toList();
     }
@@ -54,6 +62,32 @@ public class TextPostService {
 
     }
 
+    public TextPostDto updateTextPost(String id, TextPostRequestDto post) {
+
+        if (id == null || id.length() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Id parameter must be valid mongoDB id");
+        }
+
+        TextPost existingPost = textPostRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "post not found on DB"));
+
+        // update hashtags
+        Map<String, Integer> newHashtags = findHashtagsInText(post.postBody());
+
+        PostMetadata metadata = existingPost.getPostMetadata();
+
+        metadata.setLastModified(Instant.now());
+
+        existingPost.setPostMetadata(metadata);
+        existingPost.setPostBody(post.postBody());
+        existingPost.setHashtags(newHashtags);
+
+        TextPost savedPost = textPostRepository.save(existingPost);
+
+        return TextPost.toDto(savedPost);
+    }
+
     private Map<String, Integer> findHashtagsInText(String text) {
         Map<String, Integer> hashtagCounter = new HashMap<>();
 
@@ -68,29 +102,6 @@ public class TextPostService {
         }
 
         return hashtagCounter;
-    }
-
-    public TextPostDto updateTextPost(String id, TextPostRequestDto post) {
-
-        if (id == null || id.length() == 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Id parameter must be valid mongoDB id");
-        }
-
-        TextPost existingPost = textPostRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "post not found on DB"));
-
-        BeanUtils.copyProperties(post, existingPost, "id");
-
-        PostMetadata metadata = existingPost.getPostMetadata();
-
-        metadata.setLastModified(Instant.now());
-
-        existingPost.setPostMetadata(metadata);
-
-        TextPost savedPost = textPostRepository.save(existingPost);
-
-        return TextPost.toDto(savedPost);
     }
 
 }
