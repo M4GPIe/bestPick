@@ -1,12 +1,16 @@
 package com.bestpick.comments.service;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.bestpick.comments.dto.CommentDto;
 import com.bestpick.comments.dto.CommentRequestDto;
 import com.bestpick.comments.model.Comment;
+import com.bestpick.comments.model.CommentMetadata;
 import com.bestpick.comments.repository.CommentsRepository;
 
 public class CommentsService {
@@ -35,8 +39,24 @@ public class CommentsService {
     }
 
     public CommentDto updateComment(String commentId, String commentBody) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateComment'");
+
+        if (commentId == null || commentId.length() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "commentId should be a valid mongoDB id");
+        }
+
+        Comment comment = commentsRepository.findById(commentId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "comment not found on DB"));
+
+        comment.setCommentbody(commentBody);
+
+        CommentMetadata metadata = comment.getCommentMetadata();
+
+        metadata.setLastModified(Instant.now());
+
+        comment.setCommentMetadata(metadata);
+
+        return Comment.toDto(commentsRepository.save(comment));
     }
 
     public CommentDto postComment(CommentRequestDto newComment) {
