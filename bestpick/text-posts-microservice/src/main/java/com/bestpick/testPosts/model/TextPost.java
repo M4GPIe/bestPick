@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.bestpick.testPosts.dto.TextPostDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +27,13 @@ public class TextPost {
     private PostMetadata postMetadata;
 
     private Map<String, Integer> hashtags;
+
+    public static TextPostDto toDto(TextPost textPost) {
+        return new TextPostDto(
+                textPost.getId(),
+                textPost.getUserId(),
+                textPost.getPostBody(),
+                textPost.getPostMetadata());
+    }
 
 }
