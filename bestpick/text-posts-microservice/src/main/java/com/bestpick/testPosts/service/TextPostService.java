@@ -82,6 +82,12 @@ public class TextPostService {
 
         BeanUtils.copyProperties(post, existingPost, "id");
 
+        PostMetadata metadata = existingPost.getPostMetadata();
+
+        metadata.setLastModified(Instant.now());
+
+        existingPost.setPostMetadata(metadata);
+
         TextPost savedPost = textPostRepository.save(existingPost);
 
         return TextPost.toDto(savedPost);
