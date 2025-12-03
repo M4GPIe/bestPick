@@ -27,15 +27,17 @@ public class CommentsController {
     CommentsService commentsService;
 
     @GetMapping
-    public ResponseEntity<List<CommentDto>> getComments(@RequestParam String userId, @RequestParam String postId) {
+    public ResponseEntity<List<CommentDto>> getComments(@RequestParam(required = false) String userId,
+            @RequestParam(required = false) String postId) {
         List<CommentDto> comments = commentsService.getComments(userId, postId);
 
         return ResponseEntity.ok(comments);
     }
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<CommentDto> putMethodName(@PathVariable String commentId, @RequestBody String commentBody) {
-        CommentDto updatedComment = commentsService.updateComment(commentId, commentBody);
+    public ResponseEntity<CommentDto> putMethodName(@PathVariable String commentId,
+            @RequestBody CommentRequestDto newComment) {
+        CommentDto updatedComment = commentsService.updateComment(commentId, newComment);
 
         return ResponseEntity.ok(updatedComment);
     }

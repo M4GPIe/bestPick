@@ -45,7 +45,7 @@ public class CommentsService {
         return commentsRepository.findAll().stream().map(Comment::toDto).toList();
     }
 
-    public CommentDto updateComment(String commentId, String commentBody) {
+    public CommentDto updateComment(String commentId, CommentRequestDto newComment) {
 
         if (commentId == null || commentId.length() == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "commentId should be a valid mongoDB id");
@@ -55,7 +55,7 @@ public class CommentsService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "comment not found on DB"));
 
-        comment.setCommentbody(commentBody);
+        comment.setCommentbody(newComment.commentBody());
 
         CommentMetadata metadata = comment.getCommentMetadata();
 
