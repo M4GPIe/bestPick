@@ -1,0 +1,17 @@
+# Env
+.env
+.env.*
+
+# Maven
+**/target/
+
+# IntelliJ / Eclipse / VSCode, etc.
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+.vscode/
+
+# System
+.DS_Store
