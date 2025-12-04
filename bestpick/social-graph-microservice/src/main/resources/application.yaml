@@ -17,7 +17,7 @@ spring:
     uri: bolt://localhost:7687
     authentication:
       username: neo4j
-      password: password123
+      password: ${NEO4J_SOCIALGRAPHDB_PASSWORD}
 
 server:
   port: 0
