@@ -4,12 +4,12 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/bestpick-users-db
-    username: admin
-    password: admin
+    username: ${BESTPICK_LOCAL_USERSDB_USER}
+    password: ${BESTPICK_LOCAL_USERSDB_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: create-drop # TODO: quit on production
+      ddl-auto: create-drop 
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
