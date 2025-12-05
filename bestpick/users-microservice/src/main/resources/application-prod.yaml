@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres-users:5432/bestpick-users-db
+    url: jdbc:postgresql://postgres-users:5433/bestpick-users-db
     username: ${POSTGRES_USERS_USER}
     password: ${POSTGRES_USERS_PASSWORD}
 

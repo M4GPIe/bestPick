@@ -1,4 +1,3 @@
-version: '3'
 services:
 
   ###############################################
@@ -9,7 +8,7 @@ services:
   postgres-users:
     container_name: postgres-users
     image: postgres
-    restart: unless-stop
+    restart: unless-stopped
     environment:
       POSTGRES_DB: bestpick-users-db
       POSTGRES_USER: ${POSTGRES_USERSDB_USER}
@@ -18,20 +17,20 @@ services:
     volumes: 
       - ./postgres-users:/data/postgres
     expose: 
-      - "5432"
+      - "5433"
     ports:
-      - "5432:5432" 
-    command: -p 5432
+      - "5433:5433" 
+    command: -p 5433
 
   #Mongo Databases Docker Compose config
   mongo-text-posts: 
     container_name: mongo-text-posts
     image: mongo:8.2.1
-    restart: unless-stop
+    restart: unless-stopped
     ports:
-      - "27017:27017" 
+      - "27018:27018" 
     expose:
-      - "27017"
+      - "27018"
     volumes:
       - ./mongo-data:/data/db
 
