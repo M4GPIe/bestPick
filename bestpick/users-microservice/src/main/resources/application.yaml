@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/bestpick-users-db
-    username: ${BESTPICK_LOCAL_USERSDB_USER}
-    password: ${BESTPICK_LOCAL_USERSDB_PASSWORD}
+    username: ${POSTGRES_USERSDB_USER}
+    password: ${POSTGRES_USERSDB_PASSWORD}
 
   jpa:
     hibernate:

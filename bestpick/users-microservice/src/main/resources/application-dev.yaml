@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://postgres-users:5433/bestpick-users-db
-    username: ${POSTGRES_USERS_USER}
-    password: ${POSTGRES_USERS_PASSWORD}
+    username: ${POSTGRES_USERSDB_USER}
+    password: ${POSTGRES_USERSDB_PASSWORD}
 
 eureka:
   client:
