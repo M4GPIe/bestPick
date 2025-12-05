@@ -3,4 +3,6 @@ eureka:
     service-url:
       defaultZone: http://eureka:8761/eureka
 
-
+bestpick:
+  eureka:
+    host: eureka

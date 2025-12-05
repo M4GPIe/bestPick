@@ -1,6 +1,7 @@
 package com.bestpick.apigateway.config.routes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,9 @@ public class GatewayConfig {
 
     @Autowired
     private ApiKeyFilter apiKeyFilter;
+
+    @Value("${bestpick.eureka.host:localhost}")
+    private String eurekaHost;
 
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
@@ -39,10 +43,10 @@ public class GatewayConfig {
 
                 .route(r -> r.path("/eureka/web")
                         .filters(f -> f.setPath("/"))
-                        .uri("http://localhost:8761"))
+                        .uri("http://" + eurekaHost + ":8761"))
 
                 .route(r -> r.path("/eureka/**")
-                        .uri("http://localhost:8761"))
+                        .uri("http://" + eurekaHost + ":8761"))
 
                 // TODO: add frontend api key filter
                 .route(r -> r.path("/auth/**")
