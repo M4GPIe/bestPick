@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/bestpick-users-db
-    username: ${POSTGRES_USERSDB_USER}
-    password: ${POSTGRES_USERSDB_PASSWORD}
+    username: ${LOCAL_POSTGRES_USERSDB_USER}
+    password: ${LOCAL_POSTGRES_USERSDB_PASSWORD}
 
   jpa:
     hibernate:
@@ -27,4 +27,4 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-profileImageUploadPath: ${PROFILE_IMAGES_UPLOAD_PATH}
+profileImageUploadPath: ${LOCAL_PROFILE_IMAGES_UPLOAD_PATH}
