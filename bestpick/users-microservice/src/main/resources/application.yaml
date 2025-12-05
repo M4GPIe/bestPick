@@ -27,4 +27,4 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-profileImageUploadPath: uploads/profile-images
+profileImageUploadPath: ${PROFILE_IMAGES_UPLOAD_PATH}
