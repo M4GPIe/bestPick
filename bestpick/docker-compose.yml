@@ -117,6 +117,7 @@ services:
     image: m4gp13/auth-service:${APP_VERSION}
     container_name: bestpick-auth-service
     pull_policy: always
+    restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
     depends_on:
@@ -128,6 +129,7 @@ services:
     image: m4gp13/social-graph-microservice:${APP_VERSION}
     container_name: bestpick-social-graph-microservice
     pull_policy: always
+    restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
       - NEO4J_SOCIALGRAPHDB_PASSWORD=${NEO4J_SOCIALGRAPHDB_PASSWORD}
@@ -135,30 +137,35 @@ services:
       - eureka
       - api-gateway
       - neo4j-social-graph
+      - broker
 
   # Text posts microservice
   text-posts-microservice: 
     image: m4gp13/text-posts-microservice:${APP_VERSION}
     container_name: bestpick-text-posts-microservice
     pull_policy: always
+    restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
     depends_on:
       - eureka
       - api-gateway
       - mongo-text-posts
+      - broker
 
   # Users microservice
   users-microservice: 
     image: m4gp13/users-microservice:${APP_VERSION}
     container_name: bestpick-users-microservice
     pull_policy: always
+    restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
       - PROFILE_IMAGES_UPLOAD_PATH=${PROFILE_IMAGES_UPLOAD_PATH}
-      - BESTPICK_LOCAL_USERSDB_USER=${BESTPICK_LOCAL_USERSDB_USER}
-      - BESTPICK_LOCAL_USERSDB_PASSWORD=${BESTPICK_LOCAL_USERSDB_PASSWORD}
+      - POSTGRES_USERSDB_USER=${POSTGRES_USERSDB_USER}
+      - POSTGRES_USERSDB_PASSWORD=${POSTGRES_USERSDB_PASSWORD}
     depends_on:
       - eureka
       - api-gateway
       - postgres-users
+      - broker
