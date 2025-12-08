@@ -1,4 +1,4 @@
-package com.bestpick.testPosts.model;
+package com.bestpick.textPosts.model;
 
 import java.time.Instant;
 

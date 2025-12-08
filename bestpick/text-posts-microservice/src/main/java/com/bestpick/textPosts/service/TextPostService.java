@@ -1,4 +1,4 @@
-package com.bestpick.testPosts.service;
+package com.bestpick.textPosts.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,11 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.bestpick.testPosts.dto.TextPostDto;
-import com.bestpick.testPosts.dto.TextPostRequestDto;
-import com.bestpick.testPosts.model.PostMetadata;
-import com.bestpick.testPosts.model.TextPost;
-import com.bestpick.testPosts.repository.TextPostRepository;
+import com.bestpick.textPosts.dto.TextPostDto;
+import com.bestpick.textPosts.dto.TextPostRequestDto;
+import com.bestpick.textPosts.model.PostMetadata;
+import com.bestpick.textPosts.model.TextPost;
+import com.bestpick.textPosts.repository.TextPostRepository;
 
 import java.time.Instant;
 

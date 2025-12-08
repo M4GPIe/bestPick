@@ -1,4 +1,4 @@
-package com.bestpick.testPosts.repository;
+package com.bestpick.textPosts.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.bestpick.testPosts.model.TextPost;
+import com.bestpick.textPosts.model.TextPost;
 
 @Repository
 public class TextPostRepositoryImpl implements TextPostRepositoryCustom {

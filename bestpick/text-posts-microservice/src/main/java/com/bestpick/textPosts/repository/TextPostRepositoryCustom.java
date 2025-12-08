@@ -1,8 +1,8 @@
-package com.bestpick.testPosts.repository;
+package com.bestpick.textPosts.repository;
 
 import java.util.List;
 
-import com.bestpick.testPosts.model.TextPost;
+import com.bestpick.textPosts.model.TextPost;
 
 public interface TextPostRepositoryCustom {
 

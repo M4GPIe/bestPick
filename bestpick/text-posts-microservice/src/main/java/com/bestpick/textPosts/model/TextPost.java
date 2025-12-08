@@ -1,11 +1,11 @@
-package com.bestpick.testPosts.model;
+package com.bestpick.textPosts.model;
 
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.bestpick.testPosts.dto.TextPostDto;
+import com.bestpick.textPosts.dto.TextPostDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

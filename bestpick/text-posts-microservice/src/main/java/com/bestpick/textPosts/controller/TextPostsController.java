@@ -1,4 +1,4 @@
-package com.bestpick.testPosts.controller;
+package com.bestpick.textPosts.controller;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bestpick.testPosts.dto.TextPostDto;
-import com.bestpick.testPosts.dto.TextPostRequestDto;
-import com.bestpick.testPosts.service.TextPostService;
+import com.bestpick.textPosts.dto.TextPostDto;
+import com.bestpick.textPosts.dto.TextPostRequestDto;
+import com.bestpick.textPosts.service.TextPostService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
