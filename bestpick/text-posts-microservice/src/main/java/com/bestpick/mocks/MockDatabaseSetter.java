@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import com.bestpick.comments.dto.CommentRequestDto;
 import com.bestpick.comments.repository.CommentsRepository;
 import com.bestpick.comments.service.CommentsService;
-import com.bestpick.testPosts.dto.TextPostDto;
-import com.bestpick.testPosts.dto.TextPostRequestDto;
-import com.bestpick.testPosts.repository.TextPostRepository;
-import com.bestpick.testPosts.service.TextPostService;
+import com.bestpick.textPosts.dto.TextPostDto;
+import com.bestpick.textPosts.dto.TextPostRequestDto;
+import com.bestpick.textPosts.repository.TextPostRepository;
+import com.bestpick.textPosts.service.TextPostService;
 
 import lombok.extern.slf4j.Slf4j;
 

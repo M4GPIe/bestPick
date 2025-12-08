@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.bestpick.comments.dto.CommentDto;
-import com.bestpick.testPosts.model.TextPost;
+import com.bestpick.textPosts.model.TextPost;
 
 @Data
 @Document(value = "comments")

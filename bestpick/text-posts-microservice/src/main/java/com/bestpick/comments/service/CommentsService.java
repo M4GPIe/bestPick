@@ -13,8 +13,8 @@ import com.bestpick.comments.dto.CommentRequestDto;
 import com.bestpick.comments.model.Comment;
 import com.bestpick.comments.model.CommentMetadata;
 import com.bestpick.comments.repository.CommentsRepository;
-import com.bestpick.testPosts.model.TextPost;
-import com.bestpick.testPosts.repository.TextPostRepository;
+import com.bestpick.textPosts.model.TextPost;
+import com.bestpick.textPosts.repository.TextPostRepository;
 
 @Service
 public class CommentsService {
