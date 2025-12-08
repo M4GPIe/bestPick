@@ -3,12 +3,12 @@ spring:
     name: social-graph-microservice
 
   kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     consumer:
       group-id: social-graph-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-        allow.auto.create.topics: true
         spring:
             json:
                 trusted:
