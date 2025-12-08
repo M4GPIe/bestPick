@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.bestpick.comments.dto.CommentRequestDto;
@@ -23,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MockDatabaseSetter implements CommandLineRunner {
 
-    @Value("${spring.profiles.active}")
+    @Value("${spring.profiles.active:localhost}")
     String profile;
 
     @Autowired
@@ -38,7 +37,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
     @Autowired
     TextPostService textPostService;
 
-    @Bean
+    @Override
     public void run(String... args) {
 
         if (profile.equals("dev")) {
