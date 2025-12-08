@@ -53,30 +53,62 @@ services:
   ###############################################
   # Kafka                                       #
   ###############################################
-
-  zookeeper: 
-    image: confluentinc/cp-zookeeper:7.0.1
-    container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
     
   broker:
-    image: confluentinc/cp-kafka:7.0.1
+    image: confluentinc/cp-kafka:8.1.1   
     container_name: kafka-broker
+    hostname: kafka-broker
     ports:
-      - "9092:9092"
-    depends_on:
-      - zookeeper
+      - "9092:9092"   
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      # should change on real prod
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      # --- KRaft ---
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka-broker:29092"
+
+      # --- Listeners / ports ---
+      KAFKA_LISTENERS: "PLAINTEXT://kafka-broker:9092,CONTROLLER://kafka-broker:29092"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-broker:9092"
+
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"   
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
+  kafka-topics-init:
+    image: confluentinc/cp-kafka:8.1.1
+    depends_on:
+      - broker
+    container_name: kafka-topics-init
+    restart: "no"
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      echo "Waiting till kafka ready..." &&
+      sleep 10 &&
+      echo "Creating topics..." &&
+
+      kafka-topics --create --if-not-exists \
+        --bootstrap-server kafka-broker:9092 \
+        --topic create-user \
+        --partitions 1 \
+        --replication-factor 1 &&
+
+      kafka-topics --create --if-not-exists \
+        --bootstrap-server kafka-broker:9092 \
+        --topic delete-user \
+        --partitions 1 \
+        --replication-factor 1 &&
+
+      # to add more topics
+      # kafka-topics --create --if-not-exists \
+      #   --bootstrap-server kafka-broker:9092 \
+      #   --topic another-topic \
+      #   --partitions 1 \
+      #   --replication-factor 1 &&
+
+      echo "Topics created:" &&
+      kafka-topics --list --bootstrap-server kafka-broker:9092
+
 
   ###############################################
   # Discovery and api gateway                   #
@@ -131,6 +163,7 @@ services:
     pull_policy: always
     restart: always
     environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka-broker:9092
       - SPRING_PROFILES_ACTIVE=${PROFILE}
       - NEO4J_SOCIALGRAPHDB_PASSWORD=${NEO4J_SOCIALGRAPHDB_PASSWORD}
     depends_on:
@@ -160,6 +193,7 @@ services:
     pull_policy: always
     restart: always
     environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka-broker:9092
       - SPRING_PROFILES_ACTIVE=${PROFILE}
       - PROFILE_IMAGES_UPLOAD_PATH=${PROFILE_IMAGES_UPLOAD_PATH}
       - POSTGRES_USERSDB_USER=${POSTGRES_USERSDB_USER}
