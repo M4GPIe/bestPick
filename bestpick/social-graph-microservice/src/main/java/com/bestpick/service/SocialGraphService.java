@@ -35,9 +35,12 @@ public class SocialGraphService {
     }
 
     public void block(Long fromUserId, Long toUserId) {
-        boolean isFollowing = socialGraphRepository.isFollowing(fromUserId, toUserId);
-        if (isFollowing) {
+        boolean followingRelations = socialGraphRepository.isFollowing(fromUserId, toUserId)
+                || socialGraphRepository.isFollowing(toUserId, fromUserId);
+
+        if (followingRelations) {
             socialGraphRepository.deleteFollowRelation(fromUserId, toUserId);
+            socialGraphRepository.deleteFollowRelation(toUserId, fromUserId);
         }
         socialGraphRepository.createBlockingRelation(fromUserId, toUserId);
     }
