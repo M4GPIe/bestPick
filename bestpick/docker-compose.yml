@@ -27,6 +27,7 @@ services:
     container_name: mongo-text-posts
     image: mongo:8.2.1
     restart: unless-stopped
+    command: ["mongod", "--port", "27018", "--bind_ip_all"]
     ports:
       - "27018:27018" 
     expose:
