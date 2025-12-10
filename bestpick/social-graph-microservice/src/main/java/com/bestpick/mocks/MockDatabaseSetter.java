@@ -22,7 +22,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        if (profile.equals("dev")) {
+        if (!profile.equals("prod")) {
 
             // delete DB
             socialGraphRepository.deleteAll();

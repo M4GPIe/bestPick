@@ -27,7 +27,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        if (profile.equals("dev")) {
+        if (!profile.equals("prod")) {
 
             // delete DB
             userRepository.deleteAll();
@@ -45,7 +45,8 @@ public class MockDatabaseSetter implements CommandLineRunner {
                     "https://picsum.photos/seed/user03/300/300", encoder));
             users.add(internalUser("user04", "Password04!", "Programador nocturno, gamer diurno 🎮",
                     "https://picsum.photos/seed/user04/300/300", encoder));
-            users.add(internalUser("user05", "Password05!", "Siempre buscando la mejor pizza de la ciudad 🍕",
+            users.add(internalUser("user05", "Password05!",
+                    "Siempre buscando la mejor pizza de la ciudad 🍕",
                     "https://picsum.photos/seed/user05/300/300", encoder));
             users.add(internalUser("user06", "Password06!", "Amante de los gatos y del buen código 😺",
                     "https://picsum.photos/seed/user06/300/300", encoder));
@@ -55,7 +56,8 @@ public class MockDatabaseSetter implements CommandLineRunner {
                     "https://picsum.photos/seed/user08/300/300", encoder));
             users.add(internalUser("user09", "Password09!", "Café, teclado mecánico y TypeScript ☕⌨️",
                     "https://picsum.photos/seed/user09/300/300", encoder));
-            users.add(internalUser("user10", "Password10!", "Minimalismo y productividad como estilo de vida ✅",
+            users.add(internalUser("user10", "Password10!",
+                    "Minimalismo y productividad como estilo de vida ✅",
                     "https://picsum.photos/seed/user10/300/300", encoder));
             users.add(internalUser("user11", "Password11!", "Aprendiendo algo nuevo cada día 🤓",
                     "https://picsum.photos/seed/user11/300/300", encoder));
@@ -75,7 +77,8 @@ public class MockDatabaseSetter implements CommandLineRunner {
                     "https://picsum.photos/seed/user18/300/300", encoder));
             users.add(internalUser("user19", "Password19!", "Buscador oficial de bugs 🐞",
                     "https://picsum.photos/seed/user19/300/300", encoder));
-            users.add(internalUser("user20", "Password20!", "Jugador de equipo y amante del pair programming 👥",
+            users.add(internalUser("user20", "Password20!",
+                    "Jugador de equipo y amante del pair programming 👥",
                     "https://picsum.photos/seed/user20/300/300", encoder));
             users.add(internalUser("user21", "Password21!", "Friki de las APIs y los microservicios 🌐",
                     "https://picsum.photos/seed/user21/300/300", encoder));
@@ -129,7 +132,8 @@ public class MockDatabaseSetter implements CommandLineRunner {
                     "https://picsum.photos/seed/user44/300/300", "google.com", "google-uid-00044"));
             users.add(googleUser("user45", "Microservicios pero sin dramas, por favor 🙏",
                     "https://picsum.photos/seed/user45/300/300", "google.com", "google-uid-00045"));
-            users.add(googleUser("user46", "Aficionad@ a los juegos de mesa y a los diagramas de secuencia 🎲",
+            users.add(googleUser("user46",
+                    "Aficionad@ a los juegos de mesa y a los diagramas de secuencia 🎲",
                     "https://picsum.photos/seed/user46/300/300", "google.com", "google-uid-00046"));
             users.add(googleUser("user47", "Fan del Clean Architecture y del buen café ☕",
                     "https://picsum.photos/seed/user47/300/300", "google.com", "google-uid-00047"));
