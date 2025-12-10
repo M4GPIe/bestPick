@@ -10,8 +10,10 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.bestpick.comments.repository.CommentsRepository;
 import com.bestpick.textPosts.dto.TextPostDto;
 import com.bestpick.textPosts.dto.TextPostRequestDto;
 import com.bestpick.textPosts.model.PostMetadata;
@@ -26,6 +28,9 @@ public class TextPostService {
     @Autowired
     TextPostRepository textPostRepository;
 
+    @Autowired
+    CommentsRepository commentsRepository;
+
     public List<TextPostDto> getTextPosts(String userId, String[] hashTags) {
 
         List<String> hashtagsList = new ArrayList<String>();
@@ -39,11 +44,13 @@ public class TextPostService {
         return textPosts.stream().map(TextPost::toDto).toList();
     }
 
+    @Transactional
     public void deletePost(String id) {
         if (id == null || id.length() == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id parameter must be valid mongoDB id");
         }
         textPostRepository.deleteById(id);
+        commentsRepository.deleteByTextPost_IdIn(List.of(id));
     }
 
     public TextPostDto createTextPost(TextPostRequestDto post) {
