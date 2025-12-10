@@ -98,7 +98,7 @@ public class TextPostService {
         while (matcher.find()) {
             String hashtag = matcher.group(1);
 
-            hashtagCounter.merge(hashtag, 1, Integer::sum);
+            hashtagCounter.merge(hashtag, 1, (old, curr) -> old + curr);
         }
 
         return hashtagCounter;
