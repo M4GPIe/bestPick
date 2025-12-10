@@ -4,6 +4,18 @@ spring:
     data:
         mongodb:
             uri: mongodb://localhost:27017/text-posts-microservice
+
+    kafka:
+        bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+        consumer:
+            group-id: text-posts-group
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+            properties:
+                spring:
+                    json:
+                        trusted:
+                            packages: "com.bestpick.kafka.events"
 server:
     port: 0
 eureka:

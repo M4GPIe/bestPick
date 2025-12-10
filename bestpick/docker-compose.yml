@@ -180,6 +180,7 @@ services:
     pull_policy: always
     restart: always
     environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka-broker:9092
       - SPRING_PROFILES_ACTIVE=${PROFILE}
     depends_on:
       - eureka
