@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class TextPostService {
     @Autowired
     CommentsRepository commentsRepository;
 
-    public List<TextPostDto> getTextPosts(String userId, String[] hashTags) {
+    public List<TextPostDto> getTextPosts(Long userId, String[] hashTags) {
 
         List<String> hashtagsList = new ArrayList<String>();
 
@@ -50,7 +51,7 @@ public class TextPostService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id parameter must be valid mongoDB id");
         }
         textPostRepository.deleteById(id);
-        commentsRepository.deleteByTextPost_IdIn(List.of(id));
+        commentsRepository.deleteByTextPostIdIn(List.of(new ObjectId(id)));
     }
 
     public TextPostDto createTextPost(TextPostRequestDto post) {

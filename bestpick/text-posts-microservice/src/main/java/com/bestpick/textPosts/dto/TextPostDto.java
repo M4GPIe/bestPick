@@ -4,7 +4,7 @@ import com.bestpick.textPosts.model.PostMetadata;
 
 public record TextPostDto(
         String id,
-        String userId,
+        Long userId,
         String postBody,
         PostMetadata postMetadata) {
 }

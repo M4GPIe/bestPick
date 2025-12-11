@@ -18,11 +18,11 @@ public class TextPostRepositoryImpl implements TextPostRepositoryCustom {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<TextPost> findByUserIdAndHashtags(String userId, List<String> hashtags) {
+    public List<TextPost> findByUserIdAndHashtags(Long userId, List<String> hashtags) {
 
         List<Criteria> criteriaList = new ArrayList<>();
 
-        if (userId != null && userId.length() > 0) {
+        if (userId != null) {
             criteriaList.add(Criteria.where("userId").is(userId));
         }
 

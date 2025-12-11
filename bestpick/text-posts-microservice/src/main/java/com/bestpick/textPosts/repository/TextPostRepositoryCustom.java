@@ -6,5 +6,5 @@ import com.bestpick.textPosts.model.TextPost;
 
 public interface TextPostRepositoryCustom {
 
-    List<TextPost> findByUserIdAndHashtags(String userId, List<String> hashtags);
+    List<TextPost> findByUserIdAndHashtags(Long userId, List<String> hashtags);
 }

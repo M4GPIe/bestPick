@@ -20,7 +20,7 @@ public class TextPost {
     @Id
     private String id;
 
-    private String userId;
+    private Long userId;
 
     private String postBody;
 

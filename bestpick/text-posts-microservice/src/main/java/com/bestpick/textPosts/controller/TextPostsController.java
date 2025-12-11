@@ -27,7 +27,7 @@ public class TextPostsController {
     TextPostService textPostService;
 
     @GetMapping()
-    public ResponseEntity<TextPostDto[]> getTextPosts(@RequestParam(required = false) String userId,
+    public ResponseEntity<TextPostDto[]> getTextPosts(@RequestParam(required = false) Long userId,
             @RequestParam(required = false) String[] hashtags) {
         List<TextPostDto> textPosts = textPostService.getTextPosts(userId, hashtags);
 
