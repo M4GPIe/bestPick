@@ -6,12 +6,12 @@
     <parent>
           <groupId>com.bestpick</groupId>
           <artifactId>bestpick-microservices</artifactId>
-          <version>1.3.0-SNAPSHOT</version>
+          <version>1.3.1</version>
     </parent>
 
     <groupId>com.bestpick</groupId>
     <artifactId>text-posts-microservice</artifactId>
-    <version>1.3.0-SNAPSHOT</version>
+    <version>1.3.1</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
