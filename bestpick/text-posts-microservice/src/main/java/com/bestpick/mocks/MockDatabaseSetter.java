@@ -51,7 +51,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p1 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "1",
+                            1L,
                             """
                                     Primera prueba de post en BestPick 🎉
                                     Probando el feed, los comentarios y las notificaciones.
@@ -61,7 +61,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p2 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "3",
+                            3L,
                             """
                                     Hoy he estado refactorizando un servicio enorme…
                                     A veces borrar código da más gusto que escribirlo 😌
@@ -70,7 +70,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p3 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "5",
+                            5L,
                             """
                                     ¿Team café ☕ o team té 🍵 para programar?
                                     Yo necesito al menos dos cafés para arrancar el día.
@@ -79,7 +79,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p4 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "8",
+                            8L,
                             """
                                     Acabo de terminar una maratón de series y ahora
                                     no sé qué ver… recomendaciones de sci-fi? 🚀
@@ -88,7 +88,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p5 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "12",
+                            12L,
                             """
                                     Playlist de lo-fi + lluvia de fondo + IDE abierto = combo perfecto 🎧🌧️
                                     ¿Alguien más programa con música casi siempre?
@@ -97,7 +97,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p6 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "15",
+                            15L,
                             """
                                     Hoy tocó escape room con el equipo 🧩
                                     Más difícil que entender un bug en producción 🤯
@@ -106,7 +106,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p7 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "18",
+                            18L,
                             """
                                     Nada como hacer hiking por la mañana y deploy por la tarde 🏔️🚀
                                     Balance perfecto entre naturaleza y código.
@@ -115,7 +115,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p8 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "21",
+                            21L,
                             """
                                     Probando una nueva API REST que hemos montado en el curro.
                                     El swagger ha quedado bastante limpio 😎
@@ -124,7 +124,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p9 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "26",
+                            26L,
                             """
                                     Me he pasado medio día peleándome con la configuración de OAuth2 😅
                                     Pero ya funciona el login con Google, por fin.
@@ -133,7 +133,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p10 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "30",
+                            30L,
                             """
                                     ¿Alguien más usa dark mode en TODO?
                                     IDE, sistema operativo, navegador… 🌑
@@ -142,7 +142,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p11 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "35",
+                            35L,
                             """
                                     Hoy ha sido día de logs, métricas y dashboards 📊
                                     Observabilidad > adivinar qué pasa en producción.
@@ -151,7 +151,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
 
             TextPostDto p12 = textPostService.createTextPost(
                     new TextPostRequestDto(
-                            "40",
+                            40L,
                             """
                                     Viernes de refactors suaves y poca presión 🧹
                                     Ideal para dejar el repo un poco más limpio antes del finde.
@@ -163,149 +163,149 @@ public class MockDatabaseSetter implements CommandLineRunner {
             // Post 1 (user 1)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "2",
+                            2L,
                             "Aquí el primer comentario 🙋‍♂️ ¡Bienvenido a BestPick!",
                             p1.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "4",
+                            4L,
                             "Buen texto para probar el feed, se ve todo OK 👌",
                             p1.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "10",
+                            10L,
                             "Yo solo vengo por los emojis 😄",
                             p1.id()));
 
             // Post 2 (user 3)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "1",
+                            1L,
                             "Refactorizar es terapéutico, totalmente de acuerdo 😌",
                             p2.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "6",
+                            6L,
                             "Mientras pases los tests, todo está bien 😂",
                             p2.id()));
 
             // Post 3 (user 5)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "7",
+                            7L,
                             "Team café ☕ siempre. Sin café no hay código.",
                             p3.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "9",
+                            9L,
                             "Yo soy más de té, pero el café huele mejor 😅",
                             p3.id()));
 
             // Post 4 (user 8)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "11",
+                            11L,
                             "Te recomiendo 'The Expanse' si no la has visto 🚀",
                             p4.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "13",
+                            13L,
                             "Si encuentras una buena serie sci-fi, comparte por aquí 🙌",
                             p4.id()));
 
             // Post 5 (user 12)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "14",
+                            14L,
                             "Lo-fi para concentrarse es top 🔝",
                             p5.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "16",
+                            16L,
                             "Yo necesito silencio absoluto, soy un bicho raro 🙈",
                             p5.id()));
 
             // Post 6 (user 15)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "17",
+                            17L,
                             "¿Escapasteis a tiempo? 😏",
                             p6.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "19",
+                            19L,
                             "Los bugs de producción son el escape room definitivo 😂",
                             p6.id()));
 
             // Post 7 (user 18)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "20",
+                            20L,
                             "Suena a día perfecto, la verdad 👌",
                             p7.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "22",
+                            22L,
                             "Yo cambio el hiking por sofá, pero el deploy lo dejo 😅",
                             p7.id()));
 
             // Post 8 (user 21)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "23",
+                            23L,
                             "Una buena API con buen swagger vale oro 💎",
                             p8.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "24",
+                            24L,
                             "¿Habéis publicado la documentación? Me interesa echarle un ojo.",
                             p8.id()));
 
             // Post 9 (user 26, google)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "27",
+                            27L,
                             "OAuth2 siempre duele la primera vez 😂",
                             p9.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "28",
+                            28L,
                             "Bien ahí ese login con Google, calidad de vida para usuarios 🙌",
                             p9.id()));
 
             // Post 10 (user 30, google)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "29",
+                            29L,
                             "Dark mode o nada. La luz blanca hace daño 😎",
                             p10.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "31",
+                            31L,
                             "Solo uso light mode para impresionar en las demos 😂",
                             p10.id()));
 
             // Post 11 (user 35, google)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "33",
+                            33L,
                             "Sin métricas es imposible saber si algo va realmente bien.",
                             p11.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "34",
+                            34L,
                             "Totalmente, los dashboards son la nueva bola de cristal 🔮",
                             p11.id()));
 
             // Post 12 (user 40, google)
             commentsService.postComment(
                     new CommentRequestDto(
-                            "36",
+                            36L,
                             "Buen momento del año para limpiar el repo 👌",
                             p12.id()));
             commentsService.postComment(
                     new CommentRequestDto(
-                            "38",
+                            38L,
                             "Refactors de viernes: menos riesgo, más satisfacción 😄",
                             p12.id()));
 
