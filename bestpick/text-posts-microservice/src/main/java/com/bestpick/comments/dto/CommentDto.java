@@ -4,7 +4,7 @@ import com.bestpick.comments.model.CommentMetadata;
 
 public record CommentDto(
         String id,
-        String userId,
+        Long userId,
         String commentBody,
         String postId,
         CommentMetadata commentMetadata) {

@@ -27,7 +27,7 @@ public class CommentsController {
     CommentsService commentsService;
 
     @GetMapping
-    public ResponseEntity<List<CommentDto>> getComments(@RequestParam(required = false) String userId,
+    public ResponseEntity<List<CommentDto>> getComments(@RequestParam(required = false) Long userId,
             @RequestParam(required = false) String postId) {
         List<CommentDto> comments = commentsService.getComments(userId, postId);
 

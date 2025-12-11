@@ -25,7 +25,7 @@ public class CommentsService {
     @Autowired
     TextPostRepository textPostsRepository;
 
-    public List<CommentDto> getComments(String userId, String postId) {
+    public List<CommentDto> getComments(Long userId, String postId) {
 
         if (userId != null && postId != null) {
             return commentsRepository.findByUserIdAndTextPost_Id(userId, postId)

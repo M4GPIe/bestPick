@@ -20,7 +20,7 @@ public class Comment {
     @Id
     private String id;
 
-    private String userId;
+    private Long userId;
 
     @DBRef
     private TextPost textPost;
