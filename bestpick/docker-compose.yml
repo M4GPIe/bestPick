@@ -154,6 +154,7 @@ services:
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
+      - SECRET_JWT_KEY=${SECRET_JWT_KEY}
     depends_on:
       - eureka
       - api-gateway

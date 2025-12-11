@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,21 +18,27 @@ import com.bestpick.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import jakarta.annotation.PostConstruct;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@NoArgsConstructor
 public class JWTService {
 
     private SecretKey secretKey;
 
-    // TODO: for prod use env api key because currently changes every time it runs
-    public JWTService() {
+    @Value("${bestpick.secretkey}")
+    String keyString;
+
+    @PostConstruct
+    public void init() {
         try {
-            KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
-            secretKey = keyGen.generateKey();
+            byte[] keyBytes = keyString.getBytes("UTF-8");
+            secretKey = new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al inicializar la clave secreta", e);
         }
     }
 
