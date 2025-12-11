@@ -48,8 +48,8 @@ public class GatewayConfig {
                 .route(r -> r.path("/eureka/**")
                         .uri("http://" + eurekaHost + ":8761"))
 
-                // TODO: add frontend api key filter
                 .route(r -> r.path("/auth/**")
+                        .filters(f -> f.filter(apiKeyFilter))
                         .uri("lb://auth-microservice"))
 
                 .build();
