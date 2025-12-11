@@ -138,6 +138,7 @@ services:
       - "8080"
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
+      - FRONTEND_API_KEY=${FRONTEND_API_KEY}
     depends_on:
       - eureka
 
