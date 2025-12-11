@@ -1,5 +1,6 @@
 package com.bestpick.apigateway.config.routes;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.http.HttpHeaders;
@@ -14,9 +15,8 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class ApiKeyFilter implements GatewayFilter {
 
-    // TODO: save frontend api key on docker env
-
-    String frontendApiKey = "asdadni34e732yr4e23ndwd8923hednd2893eh293dnwq";
+    @Value("${bestpick.front-api-key}")
+    String frontendApiKey;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -24,7 +24,7 @@ public class ApiKeyFilter implements GatewayFilter {
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
         if (authHeader != null) {
-
+            log.info("Front api key:: {}", frontendApiKey);
             String token = authHeader.replace("Bearer ", "");
 
             log.info("User token:: {}", token);
