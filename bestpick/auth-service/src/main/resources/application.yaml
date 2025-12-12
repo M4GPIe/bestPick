@@ -11,4 +11,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 bestpick:
-  secretkey: ${SECRET_JWT_KEY}
+  secretkey: ${LOCAL_SECRET_JWT_KEY}

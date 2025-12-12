@@ -6,3 +6,4 @@ eureka:
 bestpick:
   eureka:
     host: eureka
+  front-api-key: ${FRONTEND_API_KEY}

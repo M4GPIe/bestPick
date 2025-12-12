@@ -2,3 +2,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka:8761/eureka
+
+bestpick:
+  secretkey: ${SECRET_JWT_KEY}
