@@ -22,6 +22,7 @@
         <module>auth-service</module>
         <module>social-graph-microservice</module>
         <module>text-posts-microservice</module>
+        <module>votes-microservice</module>
     </modules>
 
     <properties>
