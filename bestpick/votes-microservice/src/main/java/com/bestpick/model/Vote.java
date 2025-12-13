@@ -1,7 +1,5 @@
 package com.bestpick.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
@@ -13,14 +11,6 @@ import lombok.NoArgsConstructor;
 enum PostType {
     TEXT,
     MEDIA
-}
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class VoteId implements Serializable {
-    private String userId;
-    private String postId;
 }
 
 @Data
