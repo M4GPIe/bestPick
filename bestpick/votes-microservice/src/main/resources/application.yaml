@@ -2,6 +2,18 @@ spring:
     application:
         name: votes-microservice
 
+    datasource:
+        url: jdbc:postgresql://localhost:5432/bestpick-votes-db
+        username: ${LOCAL_POSTGRES_VOTESDB_USER}
+        password: ${LOCAL_POSTGRES_VOTESDB_PASSWORD}
+
+    jpa:
+        hibernate:
+            ddl-auto: create-drop 
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+
 server:
     port: 0
 
