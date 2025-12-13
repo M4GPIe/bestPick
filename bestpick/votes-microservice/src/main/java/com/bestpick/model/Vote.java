@@ -8,11 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-enum PostType {
-    TEXT,
-    MEDIA
-}
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
