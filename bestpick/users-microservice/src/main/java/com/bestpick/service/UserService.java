@@ -175,4 +175,33 @@ public class UserService {
 
     }
 
+    public boolean isValidInternalLogin(String username, String password) {
+
+        List<User> users = userRepository.findByUsername(username);
+
+        if (users.size() == 0) {
+            return false;
+        }
+
+        User user = users.get(0);
+
+        return encoder.matches(password, user.getPasswordHash());
+    }
+
+    public boolean isValidExternalLogin(String username, String sub) {
+        List<User> users = userRepository.findByUsername(username);
+
+        if (users.size() == 0) {
+            return false;
+        }
+
+        User user = users.get(0);
+
+        if (user.getSub() == null || sub == null) {
+            return false;
+        }
+
+        return user.getSub().equals(sub);
+    }
+
 }

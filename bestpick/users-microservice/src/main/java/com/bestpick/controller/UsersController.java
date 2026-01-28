@@ -119,4 +119,27 @@ public class UsersController {
         return ResponseEntity.ok(taken);
     }
 
+    @Operation(summary = "Check if internal login is valid", description = "Receives the login info from auth ms and returns true if is valid or false if the given credentials are incorrect")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Body contains if login is correct or not")
+    })
+    @GetMapping("/checkIsValidLogin/internal")
+    public ResponseEntity<Boolean> checkIsValidInternalLogin(@RequestParam String username,
+            @RequestParam String password) {
+        boolean isValid = userService.isValidInternalLogin(username, password);
+
+        return ResponseEntity.ok(isValid);
+    }
+
+    @Operation(summary = "Check if external login is valid", description = "Receives the login info from auth ms and returns true if is valid or false if the given credentials are incorrect")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Body contains if login is correct or not")
+    })
+    @GetMapping("/checkIsValidLogin/external")
+    public ResponseEntity<Boolean> checkIsValidExternalLogin(@RequestParam String username,
+            @RequestParam String sub) {
+        boolean isValid = userService.isValidExternalLogin(username, sub);
+
+        return ResponseEntity.ok(isValid);
+    }
 }
