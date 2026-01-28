@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VoteId implements Serializable {
-    private String userId;
+    private Long userId;
     private String postId;
 }
