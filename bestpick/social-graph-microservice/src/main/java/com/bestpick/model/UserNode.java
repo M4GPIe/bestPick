@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Node("User")
 
-public class User {
+public class UserNode {
     @Id
     private Long id;
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.bestpick.model.Recommendation;
-import com.bestpick.model.User;
+import com.bestpick.model.UserNode;
 import com.bestpick.model.UserRelations;
 import com.bestpick.repository.SocialGraphRepository;
 
@@ -107,13 +107,13 @@ public class SocialGraphService {
         return recommendations;
     }
 
-    public void createUserNode(User user) {
+    public void createUserNode(UserNode user) {
         if (user != null) {
             socialGraphRepository.save(user);
         }
     }
 
-    public void deleteUserNode(User user) {
+    public void deleteUserNode(UserNode user) {
         socialGraphRepository.deleteUserAndRelations(user.getId());
     }
 }
