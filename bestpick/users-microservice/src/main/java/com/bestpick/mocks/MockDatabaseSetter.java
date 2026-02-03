@@ -160,7 +160,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
         u.setDescription(description);
         u.setProfileImagePath(profileImagePath);
         u.setIss(null);
-        u.setSub(null);
+        u.setUid(null);
         return u;
     }
 
@@ -175,7 +175,7 @@ public class MockDatabaseSetter implements CommandLineRunner {
         u.setDescription(description);
         u.setProfileImagePath(profileImagePath);
         u.setIss(iss);
-        u.setSub(sub);
+        u.setUid(sub);
         return u;
     }
 }

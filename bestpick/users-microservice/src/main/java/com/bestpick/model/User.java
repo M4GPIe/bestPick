@@ -35,7 +35,7 @@ public class User {
     private String iss; // external provider
 
     @Column(unique = true, nullable = true)
-    private String sub; // external provider user id
+    private String uid; // external provider user id
 
     public User(UserRequestDto userDto) {
         BeanUtils.copyProperties(userDto, this);
@@ -48,7 +48,7 @@ public class User {
                 this.getDescription(),
                 this.getProfileImagePath(),
                 this.getIss(),
-                this.getSub());
+                this.getUid());
     }
 
 }

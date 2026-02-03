@@ -39,7 +39,7 @@ public class UserService {
 
         User newUser = new User(userDto);
 
-        if ((userDto.password() == null && userDto.sub() == null) || userDto.username() == null) {
+        if ((userDto.password() == null && userDto.uid() == null) || userDto.username() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Missing required parameters");
         }
@@ -188,8 +188,8 @@ public class UserService {
         return encoder.matches(password, user.getPasswordHash());
     }
 
-    public boolean isValidExternalLogin(String username, String sub) {
-        List<User> users = userRepository.findByUsername(username);
+    public boolean isValidExternalLogin(String uid) {
+        List<User> users = userRepository.findByUid(uid);
 
         if (users.size() == 0) {
             return false;
@@ -197,11 +197,11 @@ public class UserService {
 
         User user = users.get(0);
 
-        if (user.getSub() == null || sub == null) {
+        if (user.getUid() == null || uid == null) {
             return false;
         }
 
-        return user.getSub().equals(sub);
+        return user.getUid().equals(uid);
     }
 
 }

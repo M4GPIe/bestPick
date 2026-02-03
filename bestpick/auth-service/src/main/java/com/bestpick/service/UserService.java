@@ -47,8 +47,7 @@ public class UserService {
                 .get()
                 .uri("http://users-microservice/api/users/checkIsValidLogin/external",
                         uriBuilder -> uriBuilder
-                                .queryParam("username", userDto.username())
-                                .queryParam("sub", userDto.sub())
+                                .queryParam("uid", userDto.uid())
                                 .build())
                 .retrieve()
                 .bodyToMono(Boolean.class)

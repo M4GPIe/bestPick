@@ -136,9 +136,8 @@ public class UsersController {
             @ApiResponse(responseCode = "200", description = "Body contains if login is correct or not")
     })
     @GetMapping("/checkIsValidLogin/external")
-    public ResponseEntity<Boolean> checkIsValidExternalLogin(@RequestParam String username,
-            @RequestParam String sub) {
-        boolean isValid = userService.isValidExternalLogin(username, sub);
+    public ResponseEntity<Boolean> checkIsValidExternalLogin(@RequestParam String uid) {
+        boolean isValid = userService.isValidExternalLogin(uid);
 
         return ResponseEntity.ok(isValid);
     }
