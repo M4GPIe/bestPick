@@ -23,10 +23,17 @@ public class Vote {
     @Id
     private String postId;
 
-    private int vote; // [-3 , 3]
+    private Integer vote; // [-3 , 3]
 
     private PostType postType;
 
     private VoteMetadata metadata;
+
+    public static boolean isValid(Vote vote) {
+        return vote.getPostId() != null &&
+                vote.getPostType() != null &&
+                vote.getUserId() != null &&
+                vote.getVote() != null;
+    }
 
 }
