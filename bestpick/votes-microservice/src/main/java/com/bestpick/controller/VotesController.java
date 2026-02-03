@@ -44,7 +44,7 @@ public class VotesController {
     }
 
     @PutMapping("/{userId}/{postId}")
-    public ResponseEntity<Vote> updateVote(@PathVariable String userId,
+    public ResponseEntity<Vote> updateVote(@PathVariable Long userId,
             @PathVariable String postId,
             @RequestBody Vote entity) {
 
@@ -54,7 +54,7 @@ public class VotesController {
     }
 
     @DeleteMapping("/{userId}/{postId}")
-    public ResponseEntity<String> deleteVote(@PathVariable String userId,
+    public ResponseEntity<String> deleteVote(@PathVariable Long userId,
             @PathVariable String postId) {
 
         votesService.deleteVote(userId, postId);
