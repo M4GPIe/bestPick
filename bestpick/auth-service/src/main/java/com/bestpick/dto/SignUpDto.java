@@ -5,10 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 
-public record UserRequestDto(
-        @Schema(description = "User name", requiredMode = RequiredMode.REQUIRED)
+public record SignUpDto(@Schema(description = "User name", requiredMode = RequiredMode.REQUIRED)
 
-        String username,
+String username,
 
         @Schema(description = "Password for internal login. If user is external e.g. google login should be null", requiredMode = RequiredMode.NOT_REQUIRED)
 
@@ -33,5 +32,4 @@ public record UserRequestDto(
         @Schema(description = "User profile picture", requiredMode = RequiredMode.NOT_REQUIRED)
 
         MultipartFile profilePhoto) {
-
 }

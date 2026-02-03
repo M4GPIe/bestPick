@@ -33,6 +33,7 @@ public class User {
     private String description;
     private String profileImagePath;
     private String iss; // external provider
+    private String email;
 
     @Column(unique = true, nullable = true)
     private String uid; // external provider user id
@@ -48,6 +49,7 @@ public class User {
                 this.getDescription(),
                 this.getProfileImagePath(),
                 this.getIss(),
+                this.getEmail(),
                 this.getUid());
     }
 

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bestpick.dto.SpringErrorDto;
 import com.bestpick.dto.ExternalUserLoginDto;
+import com.bestpick.dto.SignUpDto;
 import com.bestpick.service.JWTService;
 import com.bestpick.service.UserService;
 
@@ -57,6 +58,16 @@ public class AuthController {
     @PostMapping("/login")
     public Mono<String> loginExternal(@RequestBody ExternalUserLoginDto user) {
         return userService.loginExternalUser(user);
+    }
+
+    @Operation(summary = "Signup user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User created successfully"),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema(implementation = SpringErrorDto.class)))
+    })
+    @PostMapping("/signup")
+    public Mono<String> signUp(@RequestBody SignUpDto user) {
+        return userService.signUpUser(user);
     }
 
     @Operation(summary = "Check if token is valid", description = "Returns true if jwt token is valid and not expired")
