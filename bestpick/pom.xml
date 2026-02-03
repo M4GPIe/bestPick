@@ -13,7 +13,7 @@
 
     <groupId>com.bestpick</groupId>
     <artifactId>bestpick-microservices</artifactId>
-    <version>0.1.2-beta</version>
+    <version>0.1.3-beta</version>
     <packaging>pom</packaging>
     <modules>
         <module>api-gateway</module>
